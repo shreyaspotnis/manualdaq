@@ -17,6 +17,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.internalConfig = internalConfig
 
         self.setupUi(self)
+
+        # some additional UI setup
+        pass
+
         self.connectSlots()
 
     def connectSlots(self):
