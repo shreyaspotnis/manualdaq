@@ -3,7 +3,7 @@ run  python2-pyuic4 -xo ui_MainWindow.py MainWindow.ui on the command line
 before running the application.
 """
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from ui_MainWindow import Ui_MainWindow
 import random
 
@@ -20,6 +20,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         # some additional UI setup
         pass
+        self.timer = QtCore.QBasicTimer()
+        self.timer.start(100, self)
 
         self.connectSlots()
 
@@ -41,7 +43,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.tableData.setItem(nRows, 1, value_item)
         self.spinCurrentIndex.setValue(currIndex + 1)
 
-
     def handlePushReset(self):
         self.spinCurrentIndex.setValue(0)
         self.tableData.setRowCount(1)
@@ -57,3 +58,5 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         clipboard = QtGui.QApplication.clipboard()
         clipboard.setText(fullString)
 
+    def timerEvent(self, e):
+        self.labelValue.setText("{0:.2f}".format(random.random()))
