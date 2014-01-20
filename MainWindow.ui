@@ -33,7 +33,7 @@
         <string>Acquire</string>
        </property>
        <property name="shortcut">
-        <string>Shift+Return, Ctrl+S</string>
+        <string>Shift+Return</string>
        </property>
       </widget>
      </item>
@@ -58,6 +58,9 @@
       <widget class="QDoubleSpinBox" name="doubleSpinIndexStep">
        <property name="toolTip">
         <string>Step value of the index column when acquiring data</string>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
        </property>
       </widget>
      </item>

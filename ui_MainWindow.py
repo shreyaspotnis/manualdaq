@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Jan 20 11:44:02 2014
+# Created: Mon Jan 20 14:01:52 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -46,6 +46,7 @@ class Ui_MainWindow(object):
         self.doubleSpinIndexStart.setObjectName(_fromUtf8("doubleSpinIndexStart"))
         self.gridLayout.addWidget(self.doubleSpinIndexStart, 1, 1, 1, 1)
         self.doubleSpinIndexStep = QtGui.QDoubleSpinBox(self.gridLayoutWidget)
+        self.doubleSpinIndexStep.setProperty("value", 1.0)
         self.doubleSpinIndexStep.setObjectName(_fromUtf8("doubleSpinIndexStep"))
         self.gridLayout.addWidget(self.doubleSpinIndexStep, 2, 1, 1, 1)
         self.spinCurrentIndex = QtGui.QSpinBox(self.gridLayoutWidget)
@@ -85,7 +86,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Manual DAQ", None))
         self.pushAcquire.setToolTip(_translate("MainWindow", "Acquire data. Shortcut: Shift+Return", None))
         self.pushAcquire.setText(_translate("MainWindow", "Acquire", None))
-        self.pushAcquire.setShortcut(_translate("MainWindow", "Shift+Return, Ctrl+S", None))
+        self.pushAcquire.setShortcut(_translate("MainWindow", "Shift+Return", None))
         self.spinAverages.setToolTip(_translate("MainWindow", "Number of averages to take when acquiring", None))
         self.doubleSpinIndexStart.setToolTip(_translate("MainWindow", "Start value of the index column when acquiring data", None))
         self.doubleSpinIndexStep.setToolTip(_translate("MainWindow", "Step value of the index column when acquiring data", None))
