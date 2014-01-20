@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>234</width>
     <height>600</height>
    </rect>
   </property>
@@ -19,18 +19,105 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>301</width>
-      <height>191</height>
+      <width>221</width>
+      <height>541</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QComboBox" name="comboLJInput"/>
-     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="pushAcquire">
+       <property name="toolTip">
+        <string>Acquire data. Shortcut: Shift+Return</string>
+       </property>
        <property name="text">
         <string>Acquire</string>
+       </property>
+       <property name="shortcut">
+        <string>Shift+Return, Ctrl+S</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSpinBox" name="spinAverages">
+       <property name="toolTip">
+        <string>Number of averages to take when acquiring</string>
+       </property>
+       <property name="value">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="doubleSpinIndexStart">
+       <property name="toolTip">
+        <string>Start value of the index column when acquiring data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="doubleSpinIndexStep">
+       <property name="toolTip">
+        <string>Step value of the index column when acquiring data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QSpinBox" name="spinCurrentIndex">
+       <property name="toolTip">
+        <string>Current row to put data into</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QComboBox" name="comboLJInput">
+       <property name="toolTip">
+        <string>Select which LabJack input to use to acquire the data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QTableWidget" name="tableData">
+       <property name="rowCount">
+        <number>1</number>
+       </property>
+       <property name="columnCount">
+        <number>2</number>
+       </property>
+       <row/>
+       <column/>
+       <column/>
+       <item row="0" column="0">
+        <property name="text">
+         <string>Index</string>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="pushReset">
+       <property name="toolTip">
+        <string>Reset the data and set the current index to zero</string>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="pushCopy">
+       <property name="toolTip">
+        <string>Copy all data to clipboard. Shortcut Ctrl+Shift+C</string>
+       </property>
+       <property name="text">
+        <string>Copy</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+Shift+C</string>
        </property>
       </widget>
      </item>
@@ -42,7 +129,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>234</width>
      <height>23</height>
     </rect>
    </property>
