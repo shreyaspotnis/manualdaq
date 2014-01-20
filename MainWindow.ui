@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>234</width>
+    <width>377</width>
     <height>600</height>
    </rect>
   </property>
@@ -19,66 +19,12 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>221</width>
+      <width>339</width>
       <height>541</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="pushAcquire">
-       <property name="toolTip">
-        <string>Acquire data. Shortcut: Shift+Return</string>
-       </property>
-       <property name="text">
-        <string>Acquire</string>
-       </property>
-       <property name="shortcut">
-        <string>Shift+Return</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QSpinBox" name="spinAverages">
-       <property name="toolTip">
-        <string>Number of averages to take when acquiring</string>
-       </property>
-       <property name="value">
-        <number>20</number>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="doubleSpinIndexStart">
-       <property name="toolTip">
-        <string>Start value of the index column when acquiring data</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QDoubleSpinBox" name="doubleSpinIndexStep">
-       <property name="toolTip">
-        <string>Step value of the index column when acquiring data</string>
-       </property>
-       <property name="value">
-        <double>1.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="spinCurrentIndex">
-       <property name="toolTip">
-        <string>Current row to put data into</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QComboBox" name="comboLJInput">
-       <property name="toolTip">
-        <string>Select which LabJack input to use to acquire the data</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="2">
+     <item row="7" column="1" colspan="3">
       <widget class="QTableWidget" name="tableData">
        <property name="rowCount">
         <number>1</number>
@@ -101,7 +47,64 @@
        </item>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="0" column="3">
+      <widget class="QDoubleSpinBox" name="doubleSpinIndexStart">
+       <property name="toolTip">
+        <string>Start value of the index column when acquiring data</string>
+       </property>
+       <property name="minimum">
+        <double>-1000000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1000000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QDoubleSpinBox" name="doubleSpinIndexStep">
+       <property name="toolTip">
+        <string>Step value of the index column when acquiring data</string>
+       </property>
+       <property name="minimum">
+        <double>-1000000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1000000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Channel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Start:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="QComboBox" name="comboLJInput">
+       <property name="toolTip">
+        <string>Select which LabJack input to use to acquire the data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Step:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
       <widget class="QPushButton" name="pushReset">
        <property name="toolTip">
         <string>Reset the data and set the current index to zero</string>
@@ -111,7 +114,37 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="2" column="2">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Index:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QSpinBox" name="spinCurrentIndex">
+       <property name="toolTip">
+        <string>Current row to put data into</string>
+       </property>
+       <property name="maximum">
+        <number>10000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushAcquire">
+       <property name="toolTip">
+        <string>Acquire data. Shortcut: Shift+Return</string>
+       </property>
+       <property name="text">
+        <string>Acquire</string>
+       </property>
+       <property name="shortcut">
+        <string>Shift+Return</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
       <widget class="QPushButton" name="pushCopy">
        <property name="toolTip">
         <string>Copy all data to clipboard. Shortcut Ctrl+Shift+C</string>
@@ -124,6 +157,23 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="3">
+      <widget class="QSpinBox" name="spinAverages">
+       <property name="toolTip">
+        <string>Number of averages to take when acquiring</string>
+       </property>
+       <property name="value">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Averages</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -132,7 +182,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>234</width>
+     <width>377</width>
      <height>23</height>
     </rect>
    </property>
