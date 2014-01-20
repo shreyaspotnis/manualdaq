@@ -6,6 +6,7 @@ before running the application.
 from PyQt4 import QtGui, QtCore
 from ui_MainWindow import Ui_MainWindow
 import random
+import labjacksingle
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     """The only window of the application."""
@@ -18,8 +19,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         self.setupUi(self)
 
+        self.ljs = labjacksingle.LabJackSingle()
+        self.ljs.configure([0])
         # some additional UI setup
-        pass
+        self.comboLJInput.addItems(self.ljs.getAllChannels())
         self.timer = QtCore.QBasicTimer()
         self.timer.start(100, self)
 
@@ -29,6 +32,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.pushAcquire.clicked.connect(self.handlePushAcquire)
         self.pushCopy.clicked.connect(self.handlePushCopy)
         self.pushReset.clicked.connect(self.handlePushReset)
+        self.comboLJInput.currentIndexChanged.connect(self.handleLJInputChanged)
 
     def handlePushAcquire(self):
         nRows = self.tableData.rowCount()
@@ -36,8 +40,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         index_value = (self.doubleSpinIndexStart.value() +
                        self.doubleSpinIndexStep.value() * currIndex)
 
+        value = self.ljs.read(self.spinAverages.value())[0]
+
         index_item = QtGui.QTableWidgetItem(str(index_value))
-        value_item = QtGui.QTableWidgetItem(str(random.random()))
+        value_item = QtGui.QTableWidgetItem("{0:.2f}".format(value))
         self.tableData.setRowCount(nRows + 1)
         self.tableData.setItem(nRows, 0, index_item)
         self.tableData.setItem(nRows, 1, value_item)
@@ -49,7 +55,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     def handlePushCopy(self):
         strList = []
-        for i in range(self.tableData.rowCount()):
+        for i in range(1, self.tableData.rowCount()):
+            # starts from 1 to exclude title. Plotting software complains otherwise
             for j in range(self.tableData.columnCount()):
                 strList.append(str(self.tableData.item(i, j).text()))
                 strList.append('\t')
@@ -58,5 +65,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         clipboard = QtGui.QApplication.clipboard()
         clipboard.setText(fullString)
 
+    def handleLJInputChanged(self, newInput):
+        self.ljs.configureChannels([newInput])
+
     def timerEvent(self, e):
-        self.labelValue.setText("{0:.2f}".format(random.random()))
+        value = self.ljs.read()[0]
+        self.labelValue.setText("{0:.2f}".format(value))

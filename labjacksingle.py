@@ -40,13 +40,6 @@ class LabJackSingle(object):
             print "Sorry, your device %s is not supported. Only U3-HV is supported" % self.ljconfig['DeviceName']
             sys.exit(1)
 
-        # check if a list of channels has been provided. If not then just use
-        # all channels.
-        if channels:
-            self.channels = channels
-        else:
-            self.channels = range(16)
-
         # Configure all FIO pins to be analog
         # FIO pins are located on LabJack
         # for U3-HV, FI00-03 are equivalent to AIN0-3
@@ -57,6 +50,15 @@ class LabJackSingle(object):
         print "Configuring EI00-07 as analog inputs"
         self.d.writeRegister(EIO_ANALOG, 255)
 
+        self.configureChannels(channels)
+
+    def configureChannels(self, channels=None):
+        # check if a list of channels has been provided. If not then just use
+        # all channels.
+        if channels:
+            self.channels = channels
+        else:
+            self.channels = range(16)
         # make a list of read commands
         self.cmd = []
         for ch in self.channels:
