@@ -1,11 +1,8 @@
-"""
-run  python2-pyuic4 -xo ui_MainWindow.py MainWindow.ui on the command line
-before running the application.
-"""
-
 from PyQt4 import QtGui, QtCore, uic
 import random
 import labjacksingle
+from datetime import datetime
+from os import path
 
 Ui_MainWindow, QMainWindow = uic.loadUiType("MainWindow.ui")
 
@@ -26,6 +23,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.comboLJInput.addItems(self.ljs.getAllChannels())
         self.timer = QtCore.QBasicTimer()
         self.timer.start(100, self)
+
+        self.autoSaveFolderName = self.config.get('Settings','autosavefolder')
 
         self.connectSlots()
 
@@ -51,10 +50,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.spinCurrentIndex.setValue(currIndex + 1)
 
     def handlePushReset(self):
+        # auto save data, in case you regret pressing the reset button
+        filename = str(datetime.now()).replace(':','-')
+        fullPath = path.join(self.autoSaveFolderName, filename)
+        with open(fullPath, 'w') as fp:
+            fp.write(self.dataToString())
+
+        # reset the data
         self.spinCurrentIndex.setValue(0)
         self.tableData.setRowCount(1)
 
-    def handlePushCopy(self):
+    def dataToString(self):
         strList = []
         for i in range(1, self.tableData.rowCount()):
             # starts from 1 to exclude title. Plotting software complains otherwise
@@ -62,9 +68,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 strList.append(str(self.tableData.item(i, j).text()))
                 strList.append('\t')
             strList.append('\n')
-        fullString = "".join(strList)
+        return "".join(strList)
+
+    def handlePushCopy(self):
         clipboard = QtGui.QApplication.clipboard()
-        clipboard.setText(fullString)
+        clipboard.setText(self.dataToString())
 
     def handleLJInputChanged(self, newInput):
         self.ljs.configureChannels([newInput])
