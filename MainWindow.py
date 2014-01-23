@@ -3,12 +3,13 @@ run  python2-pyuic4 -xo ui_MainWindow.py MainWindow.ui on the command line
 before running the application.
 """
 
-from PyQt4 import QtGui, QtCore
-from ui_MainWindow import Ui_MainWindow
+from PyQt4 import QtGui, QtCore, uic
 import random
 import labjacksingle
 
-class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+Ui_MainWindow, QMainWindow = uic.loadUiType("MainWindow.ui")
+
+class MainWindow(QMainWindow, Ui_MainWindow):
     """The only window of the application."""
 
     def __init__(self, config, internalConfig):
